@@ -24,20 +24,32 @@ class BinaryTree {
     }
     levelOrderTraversal(from) {
         if (this.rootNode === null) {
-            return;
+            return [];
         }
+        let list = [];
         let nodes = new queue_1.Queue();
         nodes.enqueue(this.rootNode);
         while (!nodes.isEmpty()) {
             let currentNode = nodes.dequeue();
-            console.log("key is:" + currentNode.getKey());
-            if (currentNode === null || currentNode === void 0 ? void 0 : currentNode.leftChild) {
-                nodes.enqueue(currentNode.leftChild);
+            list.push(currentNode.getKey());
+            if (from) {
+                if ((currentNode === null || currentNode === void 0 ? void 0 : currentNode.getKey()) === from)
+                    return list.reverse();
+                if (from < currentNode.getKey() && (currentNode === null || currentNode === void 0 ? void 0 : currentNode.leftChild)) {
+                    nodes.enqueue(currentNode.leftChild);
+                }
+                else if (from > currentNode.getKey() && (currentNode === null || currentNode === void 0 ? void 0 : currentNode.rightChild)) {
+                    nodes.enqueue(currentNode.rightChild);
+                }
             }
-            if (currentNode === null || currentNode === void 0 ? void 0 : currentNode.rightChild) {
-                nodes.enqueue(currentNode.rightChild);
+            if (!from) {
+                if (currentNode === null || currentNode === void 0 ? void 0 : currentNode.leftChild)
+                    nodes.enqueue(currentNode.leftChild);
+                if (currentNode === null || currentNode === void 0 ? void 0 : currentNode.rightChild)
+                    nodes.enqueue(currentNode.rightChild);
             }
         }
+        return list;
     }
 }
 exports.BinaryTree = BinaryTree;

@@ -10,4 +10,11 @@ tree.addNode(5);
 tree.addNode(2);
 tree.addNode(9);
 tree.addNode(11);
-tree.levelOrderTraversal();
+console.log(tree.levelOrderTraversal(5));
+/*
+*        7
+*     4     8
+*   3   5     9
+* 2             11
+*
+*/ 

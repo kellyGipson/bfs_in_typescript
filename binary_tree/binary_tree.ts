@@ -26,26 +26,35 @@ export class BinaryTree<H> {
     return currentNode;
   }
 
-  public levelOrderTraversal(from?: number) {
+  public levelOrderTraversal(from?: H): H[] {
     if(this.rootNode === null) {
-      return;
+      return [];
     }
 
+    let list: H[] = [];
     let nodes: Queue<TreeNode<H>> = new Queue<TreeNode<H>>();
 
     nodes.enqueue(this.rootNode!);
+    
     while(!nodes.isEmpty()) {
       let currentNode: TreeNode<H> | undefined = nodes.dequeue();
+      list.push(currentNode!.getKey());
 
-      console.log("key is:" + currentNode!.getKey());
-
-      if(currentNode?.leftChild) {
-        nodes.enqueue(currentNode.leftChild);
+      if(from) {
+        if(currentNode?.getKey() === from) return list.reverse();
+        if(from < currentNode!.getKey() && currentNode?.leftChild) {
+          nodes.enqueue(currentNode.leftChild);
+        } else if (from > currentNode!.getKey() && currentNode?.rightChild) {
+          nodes.enqueue(currentNode.rightChild);
+        }
       }
 
-      if(currentNode?.rightChild) {
-        nodes.enqueue(currentNode.rightChild);
+      if(!from) { 
+        if(currentNode?.leftChild) nodes.enqueue(currentNode.leftChild);
+        if(currentNode?.rightChild) nodes.enqueue(currentNode.rightChild);
       }
     }
+
+    return list;
   }
 }
