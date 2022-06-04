@@ -5,7 +5,7 @@ export class Queue<T> {
     this.items.push(item);
   }
 
-  public dequeue(): T | undefined {
+  public dequeue(): T | undefined{
     return this.items.shift();
   }
 

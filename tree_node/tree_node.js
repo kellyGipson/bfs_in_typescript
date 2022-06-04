@@ -8,17 +8,5 @@ class TreeNode {
     getKey() {
         return this.key;
     }
-    getLeftChild() {
-        return this.leftChild;
-    }
-    getRightChild() {
-        return this.rightChild;
-    }
-    setLeftChild(leftNode) {
-        this.leftChild = leftNode;
-    }
-    setRightChild(rightNode) {
-        this.leftChild = rightNode;
-    }
 }
 exports.TreeNode = TreeNode;
