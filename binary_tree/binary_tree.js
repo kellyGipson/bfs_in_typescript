@@ -4,9 +4,6 @@ exports.BinaryTree = void 0;
 const queue_1 = require("../queue/queue");
 const tree_node_1 = require("../tree_node/tree_node");
 class BinaryTree {
-    constructor(node) {
-        this.rootNode = node;
-    }
     setRoot(node) {
         this.rootNode = node;
     }
@@ -14,14 +11,14 @@ class BinaryTree {
         this.rootNode = this.addNodeByRecursion(this.rootNode, key);
     }
     addNodeByRecursion(currentNode, key) {
-        if (currentNode === null) {
+        if (currentNode === undefined) {
             return new tree_node_1.TreeNode(key);
         }
-        if (key < currentNode.getKey() && currentNode.leftChild) {
-            currentNode.leftChild = this.addNodeByRecursion(currentNode.leftChild, key);
+        if (key < currentNode.getKey()) {
+            currentNode.leftChild = this.addNodeByRecursion(currentNode === null || currentNode === void 0 ? void 0 : currentNode.leftChild, key);
         }
-        else if (key > currentNode.getKey() && currentNode.rightChild) {
-            currentNode.rightChild = this.addNodeByRecursion(currentNode.rightChild, key);
+        else if (key > currentNode.getKey()) {
+            currentNode.rightChild = this.addNodeByRecursion(currentNode === null || currentNode === void 0 ? void 0 : currentNode.rightChild, key);
         }
         return currentNode;
     }
@@ -34,7 +31,7 @@ class BinaryTree {
         while (!nodes.isEmpty()) {
             let currentNode = nodes.dequeue();
             console.log("key is:" + currentNode.getKey());
-            if ((currentNode === null || currentNode === void 0 ? void 0 : currentNode.leftChild) !== null && (currentNode === null || currentNode === void 0 ? void 0 : currentNode.leftChild)) {
+            if (currentNode === null || currentNode === void 0 ? void 0 : currentNode.leftChild) {
                 nodes.enqueue(currentNode.leftChild);
             }
             if (currentNode === null || currentNode === void 0 ? void 0 : currentNode.rightChild) {

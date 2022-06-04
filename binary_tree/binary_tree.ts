@@ -2,11 +2,7 @@ import { Queue } from "../queue/queue";
 import { TreeNode } from "../tree_node/tree_node";
 
 export class BinaryTree<H> {
-  private rootNode: TreeNode<H>;
-
-  constructor(node: TreeNode<H>) {
-    this.rootNode = node;
-  }
+  private rootNode: TreeNode<H> | undefined;
 
   setRoot(node: TreeNode<H>) {
     this.rootNode = node;
@@ -16,15 +12,15 @@ export class BinaryTree<H> {
     this.rootNode = this.addNodeByRecursion(this.rootNode, key);
   }
 
-  public addNodeByRecursion(currentNode: TreeNode<H>, key: H): TreeNode<H> {
-    if(currentNode === null) {
+  public addNodeByRecursion(currentNode: TreeNode<H> | undefined, key: H): TreeNode<H> {
+    if(currentNode === undefined) {
       return new TreeNode<H>(key);
     }
 
-    if(key < currentNode.getKey() && currentNode.leftChild) {
-      currentNode.leftChild = this.addNodeByRecursion(currentNode.leftChild, key);
-    } else if(key > currentNode.getKey() && currentNode.rightChild) {
-      currentNode.rightChild = this.addNodeByRecursion(currentNode.rightChild, key);
+    if(key < currentNode.getKey()) {
+      currentNode.leftChild = this.addNodeByRecursion(currentNode?.leftChild, key);
+    } else if(key > currentNode.getKey()) {
+      currentNode.rightChild = this.addNodeByRecursion(currentNode?.rightChild, key);
     }
 
     return currentNode;
@@ -37,14 +33,14 @@ export class BinaryTree<H> {
 
     let nodes: Queue<TreeNode<H>> = new Queue<TreeNode<H>>();
 
-    nodes.enqueue(this.rootNode);
+    nodes.enqueue(this.rootNode!);
     while(!nodes.isEmpty()) {
       let currentNode: TreeNode<H> | undefined = nodes.dequeue();
 
       console.log("key is:" + currentNode!.getKey());
 
-      if(currentNode?.leftChild !== null && currentNode?.leftChild) {
-        nodes.enqueue(currentNode!.leftChild);
+      if(currentNode?.leftChild) {
+        nodes.enqueue(currentNode.leftChild);
       }
 
       if(currentNode?.rightChild) {

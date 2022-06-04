@@ -1,7 +1,7 @@
 import { BinaryTree } from "./binary_tree/binary_tree";
-import { TreeNode } from "./tree_node/tree_node";
 
-let tree = new BinaryTree<number>(new TreeNode<number>(7));
+let tree = new BinaryTree<number>();
+tree.addNode(7);
 tree.addNode(8);
 tree.addNode(4);
 tree.addNode(3);
